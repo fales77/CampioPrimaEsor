@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Esordienti 1° | Girone I | Primavera | Sola Andata (V03)</title>
+<style>
+    :root{
+      --bg:#0b1020; --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.70);
+      --line:rgba(255,255,255,.14); --shadow:0 18px 40px rgba(0,0,0,.35);
+      --radius:16px; --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      --green:rgba(25,195,125,.95);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text); min-height:100vh;
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(124,92,255,.30), transparent 55%),
+        radial-gradient(900px 600px at 90% 20%, rgba(25,195,125,.18), transparent 60%),
+        radial-gradient(800px 500px at 40% 95%, rgba(255,92,122,.14), transparent 55%),
+        var(--bg);
+    }
+
+    .wrap{ width:90%; max-width:none; margin:0 auto; padding:12px 8px 24px; }
+
+    header.hero{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      padding:10px 12px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    header.hero::after{
+      content:""; position:absolute; inset:-2px; pointer-events:none; opacity:.85;
+      background:
+        radial-gradient(520px 160px at 20% 0%, rgba(124,92,255,.22), transparent 62%),
+        radial-gradient(520px 160px at 80% 0%, rgba(25,195,125,.15), transparent 62%);
+    }
+
+    .chip{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      padding:4px 8px;
+      border-radius:999px;
+      white-space:nowrap;
+      font-family:var(--mono);
+      font-size:12.5px;
+      color:rgba(255,255,255,.82);
+    }
+    .badge{
+      font-family:var(--mono);
+      font-size:10px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:3px 8px;
+      border-radius:999px;
+      background: rgba(0,0,0,.12);
+      white-space:nowrap;
+    }
+
+    .hero-bar{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap:10px;
+    }
+    .hero-left{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-self:start; min-width:0; }
+    .hero-center{ display:flex; align-items:center; gap:12px; justify-self:center; white-space:nowrap; }
+    .hero-center-title{
+      font-weight:950;
+      font-size:20px;
+      letter-spacing:.25px;
+      color:rgba(255,255,255,.94);
+      text-shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
+    .hero-center-dot{ font-family:var(--mono); font-size:16px; color:rgba(255,255,255,.55); transform: translateY(1px); }
+    .hero-right{ display:flex; justify-self:end; align-items:center; gap:8px; min-width:0; }
+
+    .grid{ display:grid; grid-template-columns: 1.6fr .7fr; gap: 10px; margin-top: 10px; align-items:stretch; }
+
+    @media (max-width: 1020px){
+      .wrap{ width:auto; }
+      .grid{ grid-template-columns: 1fr; }
+      .hero-bar{ grid-template-columns: 1fr; gap:8px; }
+      .hero-center{ justify-self:start; }
+      .hero-right{ justify-self:start; }
+      .hero-center-title{ font-size:18px; }
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+    .card-head{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .card-title{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:.3px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .card-body{
+      padding:10px 8px 10px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      min-height:0;
+    }
+
+    .round-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:10px;
+      flex:1;
+      min-height:0;
+    }
+    @media (max-width: 1200px){ .round-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px){ .round-grid{ grid-template-columns: 1fr; } }
+
+    .round{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      min-width:0;
+    }
+
+    .round.current-round{
+      border-color: rgba(124,92,255,.55);
+      box-shadow: 0 0 0 1px rgba(124,92,255,.25) inset, 0 18px 40px rgba(0,0,0,.25);
+      background: radial-gradient(420px 180px at 20% 0%, rgba(124,92,255,.18), transparent 60%), rgba(0,0,0,.12);
+    }
+    .round.current-round .round-head{
+      background: linear-gradient(180deg, rgba(124,92,255,.18), rgba(255,255,255,.04));
+      border-bottom-color: rgba(124,92,255,.25);
+    }
+    .round.current-round::before{
+      content:"OGGI";
+      position:absolute;
+      top:8px; right:8px;
+      font-family:var(--mono);
+      font-size:10px;
+      font-weight:950;
+      letter-spacing:.4px;
+      color: rgba(255,255,255,.92);
+      border:1px solid rgba(124,92,255,.55);
+      background: rgba(124,92,255,.18);
+      padding:3px 7px;
+      border-radius:999px;
+      pointer-events:none;
+    }
+    .round.past-round{ opacity:.88; }
+
+    .round-head{
+      padding:6px 6px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      background: rgba(255,255,255,.04);
+    }
+    .round-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:nowrap;
+      min-width:0;
+      white-space:nowrap;
+    }
+    .glabel{
+      font-size:16px;
+      font-weight:950;
+      letter-spacing:.25px;
+      color:rgba(255,255,255,.90);
+    }
+    .gnum{
+      font-family:var(--mono);
+      font-size:14px;
+      font-weight:950;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(124,92,255,.45);
+      background: rgba(124,92,255,.10);
+    }
+    .gdate{ font-family:var(--mono); font-size:14px; color:var(--muted); }
+
+    .matches{ padding:7px 9px 8px; display:flex; flex-direction:column; gap:5px; }
+    .match{
+      display:grid;
+      grid-template-columns: 1fr 10px 1fr 46px; /* ✅ più spazio al risultato */
+      gap:6px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius:12px;
+      padding:5px 5px;
+      min-width:0;
+    }
+    .home,.away{
+      font-size:12px;
+      font-weight:800;
+      line-height:1.1;
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .dash{ font-family:var(--mono); font-size:12px; color:var(--muted); justify-self:center; }
+
+   /* Risultato ULTRA compatto + spazio simmetrico attorno al trattino */
+.score{
+  justify-self:end;
+  display:grid;
+  grid-template-columns: 16px 7px 16px; /* ✅ più stretto */
+  align-items:center;
+  justify-items:center;                 /* ✅ simmetria */
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:900;
+  background:transparent;
+  border:none;
+  min-width:40px;
+  font-variant-numeric: tabular-nums;
+}
+
+.score .hg,
+.score .ag{
+  width:16px;
+  text-align:center;                    /* ✅ stesso spazio dx/sx */
+}
+
+.score .sep{
+  width:7px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:900;
+}
+
+    .bye-row{
+      margin-top:3px;
+      margin-bottom:0;
+      padding:4px 6px;
+      text-align:center;
+      font-family:var(--mono);
+      font-size:11.5px;
+      color:rgba(255,255,255,.78);
+      border-top:1px dashed rgba(255,255,255,.14);
+      background:rgba(255,204,102,.06);
+      border-radius:8px;
+    }
+    .bye-row b{ color:rgba(255,255,255,.95); font-weight:950; }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.10);
+      table-layout: fixed;
+      overflow:hidden;
+    }
+    thead th{
+      text-align:left;
+      font-size:14.5px;
+      font-family:var(--mono);
+      color:rgba(255,255,255,.82);
+      letter-spacing:.3px;
+      padding:9px 9px;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      white-space:nowrap;
+    }
+    tbody tr{ height:66px; }
+    tbody td{
+      padding:2px 4px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:middle;
+      overflow:hidden;
+      font-size:12.5px;
+      color:rgba(255,255,255,.90);
+    }
+    tbody tr:hover{ background: rgba(255,255,255,.04); }
+    tbody tr:last-child td{ border-bottom:none; }
+
+    td.num, th.num{
+      font-family:var(--mono);
+      text-align:center;
+      color:rgba(255,255,255,.86);
+      width:26px;
+      font-size:15px;
+      font-weight:900;
+      font-variant-numeric: tabular-nums;
+    }
+    td.num{ padding-left:3px; padding-right:6px; }
+    th.num{ padding-left:4px; padding-right:4px; }
+
+    th.col-team{ width:50%; }
+    td.team{ padding-top:0; padding-bottom:0; }
+    .teambox{
+      height:56px;
+      display:flex;
+      align-items:center;
+      font-weight:900;
+      line-height:1.15;
+      overflow:hidden;
+      max-height: calc(1.15em * 2 + 2px);
+    }
+    th.col-pts{ width:52px; text-align:right; font-weight:950; }
+    td.pts{
+      font-family:var(--mono);
+      text-align:right;
+      font-weight:950;
+      color:var(--green);
+      font-size:16px;
+      letter-spacing:.3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note{
+      margin-top:auto;
+      font-size:11px;
+      color:var(--muted);
+      line-height:1.35;
+      padding-top:8px;
+    }
+    .note code{
+      font-family:var(--mono);
+      font-size:11px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:2px 6px;
+      border-radius:8px;
+      color:rgba(255,255,255,.86);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-bar">
+        <div class="hero-left">
+          <span class="chip">⚽ ESORDIENTI 1° anno</span>
+          <span class="chip">Torino</span>
+		  <span class="chip">2026</span>
+          <span class="chip">Primavera</span>
+          <span class="chip">GIRONE: I</span>
+          <span class="chip">Sola Andata</span>
+		  
+        </div>
+
+        <div class="hero-center" aria-label="Sezioni">
+          <div class="hero-center-title">CAMPIONATO</div>
+		</div>
+
+        <div class="hero-right">
+          <span class="badge" id="matchCount">—</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card-head">
+          <h2 class="card-title">📅 Calendario</h2>
+          <span class="badge">Tutte visibili</span>
+        </div>
+
+        <div class="card-body">
+          <div class="round-grid" id="calendar"></div>
+
+          <div class="note">
+            <!-- Inserisci i risultati nel blocco <code>DATA.rounds</code>: usa numeri (0..), oppure <code>"-"</code> se non giocata. -->
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="card-head">
+          <h2 class="card-title">🏆 Classifica</h2>
+          <span class="badge">Auto</span>
+        </div>
+
+        <div class="card-body">
+          <table aria-label="Classifica">
+            <thead>
+              <tr>
+                <th class="col-team">Squadra</th>
+                <th class="col-pts">Pu</th>
+                <th class="num">G</th>
+                <th class="num">V</th>
+                <th class="num">N</th>
+                <th class="num">P</th>
+                <th class="num">GF</th>
+                <th class="num">GS</th>
+                <th class="num">DR</th>
+              </tr>
+            </thead>
+            <tbody id="standingsBody"></tbody>
+          </table>
+
+          <div class="note">Ordinamento: Punti, poi Scontro Diretto, poi GF, poi DR, poi nome squadra.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+<script>
+  // =========================================================
+  // ✅ QUI CAMBI SOLO I DATI (squadre, partite, risultati)
+  // =========================================================
+  const DATA = {
+  teams: [
+    "CBS SCUOLA CALCIO A.S.D.",
+    "CHISOLA CALCIO",
+    "LASCARIS 1954 ASD",
+    "SISPORT S.P.A.",
+    "ALPIGNANO",
+    "CENISIA A R.L.",
+    "CSF CARMAGNOLA QUEENCAR",
+    "JUVENTUS F.C. SPA",
+    "PRO EUREKA"
+  ],
+
+  rounds: [
+
+    { n:1, date:"21/02/26", bye:"PRO EUREKA", matches:[
+      ["CBS SCUOLA CALCIO A.S.D.","ALPIGNANO","2","3"],
+      ["CHISOLA CALCIO","CENISIA A R.L.","9","0"],
+      ["LASCARIS 1954 ASD","JUVENTUS F.C. SPA","1","0"],
+      ["SISPORT S.P.A.","CSF CARMAGNOLA QUEENCAR","6","0"],
+    ]},
+
+    { n:2, date:"28/02/26", bye:"JUVENTUS F.C. SPA", matches:[
+      ["ALPIGNANO","LASCARIS 1954 ASD","3","1"],
+      ["CENISIA A R.L.","CBS SCUOLA CALCIO A.S.D.","4","3"],
+      ["CSF CARMAGNOLA QUEENCAR","CHISOLA CALCIO","0","5"],
+      ["PRO EUREKA","SISPORT S.P.A.","1","4"],
+    ]},
+
+    { n:3, date:"07/03/26", bye:"ALPIGNANO", matches:[
+      ["CBS SCUOLA CALCIO A.S.D.","CSF CARMAGNOLA QUEENCAR","5","0"],
+      ["CHISOLA CALCIO","SISPORT S.P.A.","6","1"],
+      ["LASCARIS 1954 ASD","CENISIA A R.L.","3","3"],
+      ["PRO EUREKA","JUVENTUS F.C. SPA","5","2"],
+    ]},
+
+    { n:4, date:"14/03/26", bye:"CENISIA A R.L.", matches:[
+      ["ALPIGNANO","JUVENTUS F.C. SPA","0","5"],
+      ["CHISOLA CALCIO","PRO EUREKA","1","7"],
+      ["CSF CARMAGNOLA QUEENCAR","LASCARIS 1954 ASD","2","4"],
+      ["SISPORT S.P.A.","CBS SCUOLA CALCIO A.S.D.","2","1"],
+    ]},
+
+    { n:5, date:"21/03/26", bye:"CSF CARMAGNOLA QUEENCAR", matches:[
+      ["CBS SCUOLA CALCIO A.S.D.","CHISOLA CALCIO","1","8"],
+      ["JUVENTUS F.C. SPA","CENISIA A R.L.","7","1"],
+      ["LASCARIS 1954 ASD","SISPORT S.P.A.","3","0"],
+      ["PRO EUREKA","ALPIGNANO","5","2"],
+    ]},
+
+    { n:6, date:"28/03/26", bye:"SISPORT S.P.A.", matches:[
+      ["CBS SCUOLA CALCIO A.S.D.","PRO EUREKA","1","2"],
+      ["CENISIA A R.L.","ALPIGNANO","3","6"],
+      ["CHISOLA CALCIO","LASCARIS 1954 ASD","1","2"],
+      ["CSF CARMAGNOLA QUEENCAR","JUVENTUS F.C. SPA","0","2"],
+    ]},
+
+    { n:7, date:"11/04/26", bye:"CHISOLA CALCIO", matches:[
+      ["ALPIGNANO","CSF CARMAGNOLA QUEENCAR","4","3"],
+      ["JUVENTUS F.C. SPA","SISPORT S.P.A.","8","0"],
+      ["LASCARIS 1954 ASD","CBS SCUOLA CALCIO A.S.D.","2","0"],
+      ["PRO EUREKA","CENISIA A R.L.","6","3"],
+    ]},
+
+    { n:8, date:"18/04/26", bye:"CBS SCUOLA CALCIO A.S.D.", matches:[
+      ["CHISOLA CALCIO","JUVENTUS F.C. SPA","2","2"],
+      ["CSF CARMAGNOLA QUEENCAR","CENISIA A R.L.","0","0"],
+      ["LASCARIS 1954 ASD","PRO EUREKA","2","1"],
+      ["SISPORT S.P.A.","ALPIGNANO","1-","2"],
+    ]},
+
+    { n:9, date:"25/04/26", bye:"LASCARIS 1954 ASD", matches:[
+      ["ALPIGNANO","CHISOLA CALCIO","2","11"],
+      ["CENISIA A R.L.","SISPORT S.P.A.","4","3"],
+      ["JUVENTUS F.C. SPA","CBS SCUOLA CALCIO A.S.D.","1","2"],
+      ["PRO EUREKA","CSF CARMAGNOLA QUEENCAR","8","0"],
+    ]}
+  ]
+};
+
+
+  const elCalendar = document.getElementById("calendar");
+  const elStandingsBody = document.getElementById("standingsBody");
+  const elMatchCount = document.getElementById("matchCount");
+
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+
+  function parseScore(x){
+    const t = String(x).trim();
+    if(t === "-" || t === "") return null;
+    const n = Number(t);
+    return Number.isInteger(n) && n >= 0 ? n : null;
+  }
+
+  function parseDDMMYY(s){
+    const m = String(s).trim().match(/^(\d{2})\/(\d{2})\/(\d{2}|\d{4})$/);
+    if(!m) return null;
+    const dd = Number(m[1]);
+    const mm = Number(m[2]);
+    let yy = Number(m[3]);
+    if(m[3].length === 2) yy = 2000 + yy;
+    return new Date(yy, mm - 1, dd, 0, 0, 0, 0);
+  }
+
+  function renderCalendar(){
+    elCalendar.innerHTML = "";
+    for(const r of DATA.rounds){
+      const round = document.createElement("div");
+      round.className = "round";
+      round.setAttribute("data-date", r.date);
+
+      const head = `
+        <div class="round-head">
+          <div class="round-left">
+            <span class="glabel">Giornata</span><span class="gnum">#${r.n}</span><span class="gdate">${escapeHtml(r.date)}</span>
+          </div>
+        </div>
+      `;
+
+      const matchesHtml = r.matches.map(m => {
+        const home = m[0], away = m[1], hg = m[2], ag = m[3];
+        return `
+          <div class="match" data-home="${escapeHtml(home)}" data-away="${escapeHtml(away)}">
+            <div class="home">${escapeHtml(home)}</div>
+            <div class="dash">-</div>
+            <div class="away">${escapeHtml(away)}</div>
+            <div class="score">
+              <span class="hg">${escapeHtml(hg)}</span>
+              <span class="sep">-</span>
+              <span class="ag">${escapeHtml(ag)}</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const bye = `<div class="bye-row">Riposa: <b>${escapeHtml(r.bye)}</b></div>`;
+
+      round.innerHTML = head + `<div class="matches">${matchesHtml}${bye}</div>`;
+      elCalendar.appendChild(round);
+    }
+  }
+
+  function readMatches(){
+    const all = [];
+    for(const r of DATA.rounds){
+      for(const m of r.matches){
+        all.push({
+          home: m[0],
+          away: m[1],
+          hg: parseScore(m[2]),
+          ag: parseScore(m[3]),
+        });
+      }
+    }
+    return all;
+  }
+
+  function computeStandings(matches){
+    const table = {};
+    const h2h = {}; // h2h[A][B] = punti di A contro B
+
+    function ensure(team){
+      if(!table[team]) table[team] = { team, G:0,V:0,N:0,P:0,GF:0,GS:0,DR:0,PTS:0 };
+      if(!h2h[team]) h2h[team] = {};
+    }
+
+    DATA.teams.forEach(t => ensure(t));
+
+    matches.forEach(m => {
+      if(m.hg === null || m.ag === null) return;
+      ensure(m.home); ensure(m.away);
+
+      table[m.home].G++; table[m.away].G++;
+      table[m.home].GF += m.hg; table[m.home].GS += m.ag;
+      table[m.away].GF += m.ag; table[m.away].GS += m.hg;
+
+      let homePts = 0, awayPts = 0;
+      if(m.hg > m.ag){ table[m.home].V++; table[m.away].P++; homePts = 3; }
+      else if(m.hg < m.ag){ table[m.away].V++; table[m.home].P++; awayPts = 3; }
+      else { table[m.home].N++; table[m.away].N++; homePts = 1; awayPts = 1; }
+
+      table[m.home].PTS += homePts;
+      table[m.away].PTS += awayPts;
+
+      // head-to-head points
+      h2h[m.home][m.away] = (h2h[m.home][m.away] ?? 0) + homePts;
+      h2h[m.away][m.home] = (h2h[m.away][m.home] ?? 0) + awayPts;
+    });
+
+    Object.values(table).forEach(r => r.DR = r.GF - r.GS);
+
+    const rows = Object.values(table);
+
+    rows.sort((x,y) => {
+      // 1) punti
+      if(y.PTS !== x.PTS) return y.PTS - x.PTS;
+
+      // 2) scontro diretto (solo punti nello scontro diretto tra loro)
+      const xH2H = (h2h[x.team]?.[y.team] ?? 0);
+      const yH2H = (h2h[y.team]?.[x.team] ?? 0);
+      if(yH2H !== xH2H) return yH2H - xH2H;
+
+      // 3) GF
+      if(y.GF !== x.GF) return y.GF - x.GF;
+
+      // 4) DR
+      if(y.DR !== x.DR) return y.DR - x.DR;
+
+      // 5) nome
+      return x.team.localeCompare(y.team, "it");
+    });
+
+    return rows;
+  }
+
+  function renderStandings(rows){
+    elStandingsBody.innerHTML = "";
+    rows.forEach(r => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="team"><div class="teambox">${escapeHtml(r.team)}</div></td>
+        <td class="pts">${r.PTS}</td>
+        <td class="num">${r.G}</td>
+        <td class="num">${r.V}</td>
+        <td class="num">${r.N}</td>
+        <td class="num">${r.P}</td>
+        <td class="num">${r.GF}</td>
+        <td class="num">${r.GS}</td>
+        <td class="num">${r.DR}</td>
+      `;
+      elStandingsBody.appendChild(tr);
+    });
+  }
+
+  function highlightCurrentRound(){
+    const rounds = Array.from(document.querySelectorAll(".round[data-date]"));
+    if(rounds.length === 0) return;
+
+    const today = new Date();
+    const today0 = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0,0,0,0);
+
+    const parsed = rounds
+      .map(el => ({ el, date: parseDDMMYY(el.getAttribute("data-date")) }))
+      .filter(x => x.date instanceof Date && !isNaN(x.date.getTime()))
+      .sort((a,b) => a.date - b.date);
+
+    if(parsed.length === 0) return;
+
+    let current = parsed.find(x => x.date >= today0);
+    if(!current) current = parsed[parsed.length - 1];
+
+    parsed.forEach(x => {
+      x.el.classList.remove("current-round","past-round");
+      if(x.date < current.date) x.el.classList.add("past-round");
+    });
+    current.el.classList.add("current-round");
+  }
+
+  function refresh(){
+    renderCalendar();
+    const matches = readMatches();
+    elMatchCount.textContent = `${matches.length} partite`;
+    renderStandings(computeStandings(matches));
+    highlightCurrentRound();
+  }
+
+  refresh();
+</script>
+</body>
+</html>
