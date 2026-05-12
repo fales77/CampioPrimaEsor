@@ -21,7 +21,9 @@
         radial-gradient(800px 500px at 40% 95%, rgba(255,92,122,.14), transparent 55%),
         var(--bg);
     }
+
     .wrap{ width:90%; max-width:none; margin:0 auto; padding:12px 8px 24px; }
+
     header.hero{
       border:1px solid var(--line);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
@@ -37,6 +39,7 @@
         radial-gradient(520px 160px at 20% 0%, rgba(124,92,255,.22), transparent 62%),
         radial-gradient(520px 160px at 80% 0%, rgba(25,195,125,.15), transparent 62%);
     }
+
     .chip{
       border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.05);
@@ -57,6 +60,7 @@
       background: rgba(0,0,0,.12);
       white-space:nowrap;
     }
+
     .hero-bar{
       position:relative;
       z-index:1;
@@ -76,7 +80,9 @@
     }
     .hero-center-dot{ font-family:var(--mono); font-size:16px; color:rgba(255,255,255,.55); transform: translateY(1px); }
     .hero-right{ display:flex; justify-self:end; align-items:center; gap:8px; min-width:0; }
+
     .grid{ display:grid; grid-template-columns: 1.6fr .7fr; gap: 10px; margin-top: 10px; align-items:stretch; }
+
     @media (max-width: 1020px){
       .wrap{ width:auto; }
       .grid{ grid-template-columns: 1fr; }
@@ -85,6 +91,7 @@
       .hero-right{ justify-self:start; }
       .hero-center-title{ font-size:18px; }
     }
+
     .card{
       border:1px solid var(--line);
       background: rgba(255,255,255,.05);
@@ -122,6 +129,7 @@
       flex-direction:column;
       min-height:0;
     }
+
     .round-grid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -131,6 +139,7 @@
     }
     @media (max-width: 1200px){ .round-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 640px){ .round-grid{ grid-template-columns: 1fr; } }
+
     .round{
       border:1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.12);
@@ -139,6 +148,7 @@
       position:relative;
       min-width:0;
     }
+
     .round.current-round{
       border-color: rgba(124,92,255,.55);
       box-shadow: 0 0 0 1px rgba(124,92,255,.25) inset, 0 18px 40px rgba(0,0,0,.25);
@@ -164,6 +174,7 @@
       pointer-events:none;
     }
     .round.past-round{ opacity:.88; }
+
     .round-head{
       padding:6px 6px;
       border-bottom:1px solid rgba(255,255,255,.10);
@@ -197,10 +208,11 @@
       background: rgba(124,92,255,.10);
     }
     .gdate{ font-family:var(--mono); font-size:14px; color:var(--muted); }
+
     .matches{ padding:7px 9px 8px; display:flex; flex-direction:column; gap:5px; }
     .match{
       display:grid;
-      grid-template-columns: 1fr 10px 1fr 46px;
+      grid-template-columns: 1fr 10px 1fr 46px; /* ✅ più spazio al risultato */
       gap:6px;
       align-items:center;
       border:1px solid rgba(255,255,255,.10);
@@ -219,31 +231,36 @@
       white-space:nowrap;
     }
     .dash{ font-family:var(--mono); font-size:12px; color:var(--muted); justify-self:center; }
-    .score{
-      justify-self:end;
-      display:grid;
-      grid-template-columns: 16px 7px 16px;
-      align-items:center;
-      justify-items:center;
-      font-family:var(--mono);
-      font-size:14px;
-      font-weight:900;
-      background:transparent;
-      border:none;
-      min-width:40px;
-      font-variant-numeric: tabular-nums;
-    }
-    .score .hg,
-    .score .ag{
-      width:16px;
-      text-align:center;
-    }
-    .score .sep{
-      width:7px;
-      text-align:center;
-      color:var(--muted);
-      font-weight:900;
-    }
+
+   /* Risultato ULTRA compatto + spazio simmetrico attorno al trattino */
+.score{
+  justify-self:end;
+  display:grid;
+  grid-template-columns: 16px 7px 16px; /* ✅ più stretto */
+  align-items:center;
+  justify-items:center;                 /* ✅ simmetria */
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:900;
+  background:transparent;
+  border:none;
+  min-width:40px;
+  font-variant-numeric: tabular-nums;
+}
+
+.score .hg,
+.score .ag{
+  width:16px;
+  text-align:center;                    /* ✅ stesso spazio dx/sx */
+}
+
+.score .sep{
+  width:7px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:900;
+}
+
     .bye-row{
       margin-top:3px;
       margin-bottom:0;
@@ -258,7 +275,6 @@
     }
     .bye-row b{ color:rgba(255,255,255,.95); font-weight:950; }
 
-    /* ==================== TABELLA CLASSIFICA ==================== */
     table{
       width:100%;
       border-collapse: collapse;
@@ -274,7 +290,7 @@
       font-family:var(--mono);
       color:rgba(255,255,255,.82);
       letter-spacing:.3px;
-      padding:9px 6px;
+      padding:9px 9px;
       border-bottom:1px solid var(--line);
       background: rgba(255,255,255,.05);
       white-space:nowrap;
@@ -295,43 +311,16 @@
       font-family:var(--mono);
       text-align:center;
       color:rgba(255,255,255,.86);
+      width:26px;
       font-size:15px;
       font-weight:900;
       font-variant-numeric: tabular-nums;
     }
-    td.num{ padding-left:3px; padding-right:3px; }
+    td.num{ padding-left:3px; padding-right:6px; }
     th.num{ padding-left:4px; padding-right:4px; }
 
-    /* ===================== LARGHEZZE ===================== */
-    th.col-team{ 
-      width: 49%; 
-    }
-    td.team{ 
-      padding-top:0; 
-      padding-bottom:0; 
-    }
-
-    th.col-pts{ width: 46px; }
-    td.pts{
-      font-family:var(--mono);
-      text-align:center;
-      font-weight:950;
-      color:var(--green);
-      font-size:16px;
-      letter-spacing:.2px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* G V N P - ridotte */
-    th.col-gvp, td.gvp{
-      width: 32px;
-    }
-
-    /* GF GS DR - allargate come richiesto */
-    th.col-gfgsdr, td.gfgsdr{
-      width: 47px;
-    }
-
+    th.col-team{ width:50%; }
+    td.team{ padding-top:0; padding-bottom:0; }
     .teambox{
       height:56px;
       display:flex;
@@ -340,6 +329,16 @@
       line-height:1.15;
       overflow:hidden;
       max-height: calc(1.15em * 2 + 2px);
+    }
+    th.col-pts{ width:52px; text-align:right; font-weight:950; }
+    td.pts{
+      font-family:var(--mono);
+      text-align:right;
+      font-weight:950;
+      color:var(--green);
+      font-size:16px;
+      letter-spacing:.3px;
+      font-variant-numeric: tabular-nums;
     }
 
     .note{
@@ -360,6 +359,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header class="hero">
@@ -367,54 +367,63 @@
         <div class="hero-left">
           <span class="chip">⚽ ESORDIENTI 1° anno</span>
           <span class="chip">Torino</span>
-          <span class="chip">2026</span>
+		  <span class="chip">2026</span>
           <span class="chip">Primavera</span>
           <span class="chip">GIRONE: I</span>
           <span class="chip">Sola Andata</span>
+		  
         </div>
+
         <div class="hero-center" aria-label="Sezioni">
           <div class="hero-center-title">CAMPIONATO</div>
-        </div>
+		</div>
+
         <div class="hero-right">
           <span class="badge" id="matchCount">—</span>
         </div>
       </div>
     </header>
+
     <div class="grid">
       <section class="card">
         <div class="card-head">
           <h2 class="card-title">📅 Calendario</h2>
           <span class="badge">Tutte visibili</span>
         </div>
+
         <div class="card-body">
           <div class="round-grid" id="calendar"></div>
+
           <div class="note">
             <!-- Inserisci i risultati nel blocco <code>DATA.rounds</code>: usa numeri (0..), oppure <code>"-"</code> se non giocata. -->
           </div>
         </div>
       </section>
+
       <aside class="card">
         <div class="card-head">
           <h2 class="card-title">🏆 Classifica</h2>
           <span class="badge">Auto</span>
         </div>
+
         <div class="card-body">
           <table aria-label="Classifica">
             <thead>
               <tr>
                 <th class="col-team">Squadra</th>
                 <th class="col-pts">Pu</th>
-                <th class="num col-gvp">G</th>
-                <th class="num col-gvp">V</th>
-                <th class="num col-gvp">N</th>
-                <th class="num col-gvp">P</th>
-                <th class="num col-gfgsdr">GF</th>
-                <th class="num col-gfgsdr">GS</th>
-                <th class="num col-gfgsdr">DR</th>
+                <th class="num">G</th>
+                <th class="num">V</th>
+                <th class="num">N</th>
+                <th class="num">P</th>
+                <th class="num">GF</th>
+                <th class="num">GS</th>
+                <th class="num">DR</th>
               </tr>
             </thead>
             <tbody id="standingsBody"></tbody>
           </table>
+
           <div class="note">Ordinamento: Punti, poi Scontro Diretto, poi GF, poi DR, poi nome squadra.</div>
         </div>
       </aside>
@@ -437,55 +446,65 @@
     "JUVENTUS F.C. SPA",
     "PRO EUREKA"
   ],
+
   rounds: [
+
     { n:1, date:"21/02/26", bye:"PRO EUREKA", matches:[
       ["CBS SCUOLA CALCIO A.S.D.","ALPIGNANO","2","3"],
       ["CHISOLA CALCIO","CENISIA A R.L.","9","0"],
       ["LASCARIS 1954 ASD","JUVENTUS F.C. SPA","1","0"],
       ["SISPORT S.P.A.","CSF CARMAGNOLA QUEENCAR","6","0"],
     ]},
+
     { n:2, date:"28/02/26", bye:"JUVENTUS F.C. SPA", matches:[
       ["ALPIGNANO","LASCARIS 1954 ASD","3","1"],
       ["CENISIA A R.L.","CBS SCUOLA CALCIO A.S.D.","4","3"],
       ["CSF CARMAGNOLA QUEENCAR","CHISOLA CALCIO","0","5"],
       ["PRO EUREKA","SISPORT S.P.A.","1","4"],
     ]},
+
     { n:3, date:"07/03/26", bye:"ALPIGNANO", matches:[
       ["CBS SCUOLA CALCIO A.S.D.","CSF CARMAGNOLA QUEENCAR","5","0"],
       ["CHISOLA CALCIO","SISPORT S.P.A.","6","1"],
       ["LASCARIS 1954 ASD","CENISIA A R.L.","3","3"],
       ["PRO EUREKA","JUVENTUS F.C. SPA","5","2"],
     ]},
+
     { n:4, date:"14/03/26", bye:"CENISIA A R.L.", matches:[
       ["ALPIGNANO","JUVENTUS F.C. SPA","0","5"],
       ["CHISOLA CALCIO","PRO EUREKA","1","7"],
       ["CSF CARMAGNOLA QUEENCAR","LASCARIS 1954 ASD","2","4"],
       ["SISPORT S.P.A.","CBS SCUOLA CALCIO A.S.D.","2","1"],
     ]},
+
     { n:5, date:"21/03/26", bye:"CSF CARMAGNOLA QUEENCAR", matches:[
       ["CBS SCUOLA CALCIO A.S.D.","CHISOLA CALCIO","1","8"],
       ["JUVENTUS F.C. SPA","CENISIA A R.L.","7","1"],
       ["LASCARIS 1954 ASD","SISPORT S.P.A.","3","0"],
       ["PRO EUREKA","ALPIGNANO","5","2"],
     ]},
+
     { n:6, date:"28/03/26", bye:"SISPORT S.P.A.", matches:[
       ["CBS SCUOLA CALCIO A.S.D.","PRO EUREKA","1","2"],
       ["CENISIA A R.L.","ALPIGNANO","3","6"],
       ["CHISOLA CALCIO","LASCARIS 1954 ASD","1","2"],
       ["CSF CARMAGNOLA QUEENCAR","JUVENTUS F.C. SPA","0","2"],
     ]},
+
     { n:7, date:"11/04/26", bye:"CHISOLA CALCIO", matches:[
       ["ALPIGNANO","CSF CARMAGNOLA QUEENCAR","4","3"],
       ["JUVENTUS F.C. SPA","SISPORT S.P.A.","8","0"],
       ["LASCARIS 1954 ASD","CBS SCUOLA CALCIO A.S.D.","2","0"],
       ["PRO EUREKA","CENISIA A R.L.","6","3"],
     ]},
+
     { n:8, date:"18/04/26", bye:"CBS SCUOLA CALCIO A.S.D.", matches:[
       ["CHISOLA CALCIO","JUVENTUS F.C. SPA","2","2"],
       ["CSF CARMAGNOLA QUEENCAR","CENISIA A R.L.","0","0"],
       ["LASCARIS 1954 ASD","PRO EUREKA","2","1"],
       ["SISPORT S.P.A.","ALPIGNANO","1-","2"],
     ]},
+
     { n:9, date:"25/04/26", bye:"LASCARIS 1954 ASD", matches:[
       ["ALPIGNANO","CHISOLA CALCIO","2","11"],
       ["CENISIA A R.L.","SISPORT S.P.A.","4","3"],
@@ -494,6 +513,7 @@
     ]}
   ]
 };
+
 
   const elCalendar = document.getElementById("calendar");
   const elStandingsBody = document.getElementById("standingsBody");
@@ -528,6 +548,7 @@
       const round = document.createElement("div");
       round.className = "round";
       round.setAttribute("data-date", r.date);
+
       const head = `
         <div class="round-head">
           <div class="round-left">
@@ -535,6 +556,7 @@
           </div>
         </div>
       `;
+
       const matchesHtml = r.matches.map(m => {
         const home = m[0], away = m[1], hg = m[2], ag = m[3];
         return `
@@ -550,7 +572,9 @@
           </div>
         `;
       }).join("");
+
       const bye = `<div class="bye-row">Riposa: <b>${escapeHtml(r.bye)}</b></div>`;
+
       round.innerHTML = head + `<div class="matches">${matchesHtml}${bye}</div>`;
       elCalendar.appendChild(round);
     }
@@ -573,38 +597,59 @@
 
   function computeStandings(matches){
     const table = {};
-    const h2h = {};
+    const h2h = {}; // h2h[A][B] = punti di A contro B
+
     function ensure(team){
       if(!table[team]) table[team] = { team, G:0,V:0,N:0,P:0,GF:0,GS:0,DR:0,PTS:0 };
       if(!h2h[team]) h2h[team] = {};
     }
+
     DATA.teams.forEach(t => ensure(t));
+
     matches.forEach(m => {
       if(m.hg === null || m.ag === null) return;
       ensure(m.home); ensure(m.away);
+
       table[m.home].G++; table[m.away].G++;
       table[m.home].GF += m.hg; table[m.home].GS += m.ag;
       table[m.away].GF += m.ag; table[m.away].GS += m.hg;
+
       let homePts = 0, awayPts = 0;
       if(m.hg > m.ag){ table[m.home].V++; table[m.away].P++; homePts = 3; }
       else if(m.hg < m.ag){ table[m.away].V++; table[m.home].P++; awayPts = 3; }
       else { table[m.home].N++; table[m.away].N++; homePts = 1; awayPts = 1; }
+
       table[m.home].PTS += homePts;
       table[m.away].PTS += awayPts;
+
+      // head-to-head points
       h2h[m.home][m.away] = (h2h[m.home][m.away] ?? 0) + homePts;
       h2h[m.away][m.home] = (h2h[m.away][m.home] ?? 0) + awayPts;
     });
+
     Object.values(table).forEach(r => r.DR = r.GF - r.GS);
+
     const rows = Object.values(table);
+
     rows.sort((x,y) => {
+      // 1) punti
       if(y.PTS !== x.PTS) return y.PTS - x.PTS;
+
+      // 2) scontro diretto (solo punti nello scontro diretto tra loro)
       const xH2H = (h2h[x.team]?.[y.team] ?? 0);
       const yH2H = (h2h[y.team]?.[x.team] ?? 0);
       if(yH2H !== xH2H) return yH2H - xH2H;
+
+      // 3) GF
       if(y.GF !== x.GF) return y.GF - x.GF;
+
+      // 4) DR
       if(y.DR !== x.DR) return y.DR - x.DR;
+
+      // 5) nome
       return x.team.localeCompare(y.team, "it");
     });
+
     return rows;
   }
 
@@ -615,13 +660,13 @@
       tr.innerHTML = `
         <td class="team"><div class="teambox">${escapeHtml(r.team)}</div></td>
         <td class="pts">${r.PTS}</td>
-        <td class="num gvp">${r.G}</td>
-        <td class="num gvp">${r.V}</td>
-        <td class="num gvp">${r.N}</td>
-        <td class="num gvp">${r.P}</td>
-        <td class="num gfgsdr">${r.GF}</td>
-        <td class="num gfgsdr">${r.GS}</td>
-        <td class="num gfgsdr">${r.DR}</td>
+        <td class="num">${r.G}</td>
+        <td class="num">${r.V}</td>
+        <td class="num">${r.N}</td>
+        <td class="num">${r.P}</td>
+        <td class="num">${r.GF}</td>
+        <td class="num">${r.GS}</td>
+        <td class="num">${r.DR}</td>
       `;
       elStandingsBody.appendChild(tr);
     });
@@ -630,15 +675,20 @@
   function highlightCurrentRound(){
     const rounds = Array.from(document.querySelectorAll(".round[data-date]"));
     if(rounds.length === 0) return;
+
     const today = new Date();
     const today0 = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0,0,0,0);
+
     const parsed = rounds
       .map(el => ({ el, date: parseDDMMYY(el.getAttribute("data-date")) }))
       .filter(x => x.date instanceof Date && !isNaN(x.date.getTime()))
       .sort((a,b) => a.date - b.date);
+
     if(parsed.length === 0) return;
+
     let current = parsed.find(x => x.date >= today0);
     if(!current) current = parsed[parsed.length - 1];
+
     parsed.forEach(x => {
       x.el.classList.remove("current-round","past-round");
       if(x.date < current.date) x.el.classList.add("past-round");
